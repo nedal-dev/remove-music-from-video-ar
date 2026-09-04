@@ -2,96 +2,173 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="x-page-version" content="2025-08-09-1">
-  <title>إزالة الموسيقى من الفيديو أونلاين | ملخص سريع + أدوات وروابط وأوامر FFmpeg</title>
-  <meta name="description" content="أفضل الطرق لإزالة الموسيقى من الفيديو: أدوات أونلاين مجانية، تطبيقات للهاتف والكمبيوتر، وأوامر FFmpeg المختصرة. هذا ملخّص موجز مع روابط مباشرة، والشرح الكامل على موقع إدراك.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <!-- نجعل النسخة القابلة للأرشفة هي صفحة GitHub نفسها -->
+  <title>إزالة الموسيقى من الفيديو مع الحفاظ على الكلام | دليل عملي</title>
+  <meta name="description" content="دليل عملي يوضح الفرق بين كتم صوت الفيديو وفصل الموسيقى عن الكلام، وكيف تختار أداة مناسبة وتفحص النتيجة، مع أوامر FFmpeg مفيدة وحلول لمشكلات الجودة.">
   <link rel="canonical" href="https://nedal-dev.github.io/remove-music-from-video-ar/">
-
-  <meta property="og:title" content="إزالة الموسيقى من الفيديو أونلاين | ملخص وروابط">
-  <meta property="og:description" content="روابط لأدوات فصل الصوت وحذف موسيقى الفيديو + أوامر FFmpeg. اقرأ الدليل الكامل على إدراك.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="إزالة الموسيقى من الفيديو مع الحفاظ على الكلام">
+  <meta property="og:description" content="خريطة قرار وخطوات عملية لفصل الموسيقى أو كتم الصوت أو استبدال المسار الصوتي بأمان.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://nedal-dev.github.io/remove-music-from-video-ar/">
-
-  <!-- السماح بالأرشفة -->
-  <meta name="robots" content="index,follow">
-
   <style>
-    :root{--w:880px;--c:#0d6efd;--bg:#f7fbff}
-    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;margin:0;line-height:1.9;background:#fff}
-    main{max-width:var(--w);margin:44px auto;padding:0 18px}
-    h1,h2,h3{margin:.2rem 0 .7rem}
-    .lead{color:#444}
-    .cta{display:inline-block;background:var(--c);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px;border:1px solid #0a58ca}
-    .cta:hover{background:#0b5ed7}
-    .box{background:var(--bg);border:1px solid #cce5ff;padding:18px;border-radius:12px;margin:18px 0}
-    ul{padding-inline-start:22px}
-    code,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-    pre{background:#0f172a; color:#e5e7eb; padding:14px; border-radius:10px; overflow:auto; direction:ltr}
-    .note{font-size:.92rem;color:#666}
-    footer{margin:30px 0 20px;color:#666;font-size:.9rem;text-align:center}
+    :root{--ink:#10233f;--muted:#52647d;--blue:#1769e0;--line:#dbe5f2;--soft:#f5f9ff;--green:#087f5b;--green-soft:#edfbf6;--amber:#9a5b00;--amber-soft:#fff8e8;--red:#a83030;--red-soft:#fff2f2;--w:980px}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f8fc;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.9}
+    header{background:linear-gradient(135deg,#eaf3ff,#f8fbff);border-bottom:1px solid var(--line)}
+    .hero{max-width:var(--w);margin:auto;padding:54px 22px 42px}
+    .eyebrow{display:inline-block;color:#0e5fca;background:#fff;border:1px solid #cfe0f6;border-radius:999px;padding:4px 12px;font-size:.9rem;font-weight:700}
+    h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.3;margin:14px 0 12px;max-width:850px}
+    .lead{font-size:1.12rem;color:var(--muted);max-width:820px;margin:0}
+    main{max-width:var(--w);margin:28px auto;padding:0 18px 42px}
+    article{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,42px);box-shadow:0 18px 45px rgba(28,55,92,.08)}
+    h2{font-size:1.55rem;margin:2.2rem 0 .7rem;padding-top:.2rem}
+    h3{font-size:1.12rem;margin:1.25rem 0 .35rem}
+    p{margin:.55rem 0 1rem}
+    a{color:#0969da}
+    .summary{background:var(--green-soft);border-right:4px solid var(--green);padding:18px 20px;border-radius:14px;margin-bottom:28px}
+    .summary strong{color:#075f47}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin:14px 0 22px}
+    table{border-collapse:collapse;width:100%;min-width:680px}
+    th,td{text-align:right;padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+    th{background:var(--soft);font-weight:800}
+    tr:last-child td{border-bottom:0}
+    .steps{counter-reset:step;list-style:none;padding:0;margin:14px 0}
+    .steps li{position:relative;padding:0 54px 18px 0;min-height:46px}
+    .steps li::before{counter-increment:step;content:counter(step);position:absolute;right:0;top:1px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:800}
+    .callout{padding:16px 18px;border-radius:13px;margin:18px 0;border-right:4px solid}
+    .callout.ok{background:var(--green-soft);border-color:var(--green)}
+    .callout.warn{background:var(--amber-soft);border-color:var(--amber)}
+    .callout.danger{background:var(--red-soft);border-color:var(--red)}
+    .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+    .card{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fff}
+    .card h3{margin-top:0}
+    ul{padding-inline-start:24px}
+    li{margin:.35rem 0}
+    pre{direction:ltr;text-align:left;background:#101b2d;color:#e8eef8;border-radius:12px;padding:15px;overflow:auto;line-height:1.55}
+    code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+    details{border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:10px 0}
+    summary{cursor:pointer;font-weight:800}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:25px;padding-top:22px;border-top:1px solid var(--line)}
+    .cta{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:800;padding:11px 17px;border-radius:11px}
+    .small{font-size:.93rem;color:var(--muted)}
+    footer{text-align:center;color:var(--muted);padding:22px 15px 34px}
+    @media(max-width:700px){.two-col{grid-template-columns:1fr}.hero{padding-top:38px}article{border-radius:18px}.steps li{padding-right:48px}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    "name":"إزالة الموسيقى من الفيديو مع الحفاظ على الكلام",
+    "description":"خطوات عملية لاختيار طريقة كتم الصوت أو فصل الموسيقى عن الكلام وفحص جودة النتيجة.",
+    "step":[
+      {"@type":"HowToStep","name":"حدد النتيجة المطلوبة","text":"قرر هل تريد كتم كل الصوت، أو الاحتفاظ بالكلام، أو استبدال الموسيقى."},
+      {"@type":"HowToStep","name":"اختبر مقطعًا قصيرًا","text":"جرّب من 20 إلى 40 ثانية قبل معالجة الفيديو كاملًا."},
+      {"@type":"HowToStep","name":"اختر المعالجة","text":"استخدم FFmpeg لكتم أو استبدال المسار، وأداة فصل صوتي عند اختلاط الكلام بالموسيقى."},
+      {"@type":"HowToStep","name":"افحص النتيجة","text":"استمع إلى مواضع الكلام الهادئ والموسيقى المرتفعة وتحقق من التزامن."}
+    ]
+  }
+  </script>
 </head>
 <body>
-<main>
+  <header>
+    <div class="hero">
+      <span class="eyebrow">دليل صوت وفيديو عملي</span>
+      <h1>إزالة الموسيقى من الفيديو: اختر الطريقة الصحيحة قبل أن تبدأ</h1>
+      <p class="lead">ليس كل طلب «إزالة موسيقى» متشابهًا. أحيانًا يكفي كتم الصوت، وأحيانًا نحتاج إلى فصل الموسيقى عن الكلام بخوارزمية متخصصة. يوضح هذا الدليل الفرق، ومتى تستخدم كل مسار، وكيف تتجنب نتيجة مشوهة.</p>
+    </div>
+  </header>
+  <main>
+    <article>
+      <div class="summary"><strong>الخلاصة:</strong> إذا كان الفيديو يحتوي على مسار موسيقى مستقل فالحذف سهل ونظيف. أما إذا امتزج الكلام والموسيقى داخل المسار نفسه، فلا يستطيع FFmpeg وحده فصلهما؛ تحتاج إلى أداة فصل صوتي، ثم تراجع النتيجة يدويًا.</div>
 
-  <h1>إزالة الموسيقى من الفيديو أونلاين</h1>
-  <p class="lead">
-    هذا <strong>ملخّص موجز</strong> يسهّل عليك الوصول لأفضل أدوات فصل الصوت أو كتم الموسيقى من الفيديو،
-    مع أوامر <b>FFmpeg</b> المختصرة للاستخدام المحلي. للحصول على الشرح الكامل خطوة بخطوة،
-    انتقل إلى الصفحة الأصلية على <strong>إدراك</strong>.
-  </p>
+      <h2>ابدأ بتحديد ما تريد إزالته</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>الهدف</th><th>الطريقة الأنسب</th><th>ما الذي تتوقعه؟</th></tr></thead>
+          <tbody>
+            <tr><td>جعل الفيديو صامتًا بالكامل</td><td>حذف المسار الصوتي عبر FFmpeg أو محرر فيديو</td><td>نتيجة فورية من دون فقد جودة الصورة</td></tr>
+            <tr><td>حذف الموسيقى مع إبقاء الكلام</td><td>أداة فصل الكلام والموسيقى بالذكاء الاصطناعي</td><td>الجودة تعتمد على مقدار تداخل الأصوات وجودة التسجيل</td></tr>
+            <tr><td>استبدال الموسيقى بأخرى</td><td>كتم أو حذف الصوت الأصلي ثم إضافة مسار مرخّص</td><td>تحكم واضح في مستوى الصوت والتوقيت</td></tr>
+            <tr><td>إزالة موسيقى من جزء محدد فقط</td><td>تحديد المقطع في محرر فيديو أو استخدام خريطة زمنية</td><td>تحافظ على بقية الصوت من دون تغيير</td></tr>
+            <tr><td>الفيديو يملك مسارات صوت مستقلة</td><td>حذف مسار الموسيقى وحده</td><td>أفضل حالة؛ لا حاجة إلى فصل ذكي</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-  <p>
-    <a class="cta" href="https://idraaak.com/%d8%a5%d8%b2%d8%a7%d9%84%d8%a9-%d8%a7%d9%84%d9%85%d9%88%d8%b3%d9%8a%d9%82%d9%89-%d9%85%d9%86-%d8%a7%d9%84%d9%81%d9%8a%d8%af%d9%8a%d9%88/" target="_blank" rel="noopener">
-      اقرأ الدليل الكامل: إزالة الموسيقى من الفيديو
-    </a>
-  </p>
+      <h2>مسار عمل يقلل ضياع الوقت</h2>
+      <ol class="steps">
+        <li><strong>احتفظ بنسخة من الملف الأصلي.</strong> لا تعمل على النسخة الوحيدة، خصوصًا إن كان الفيديو طويلًا أو يصعب تنزيله مجددًا.</li>
+        <li><strong>افحص المسارات الصوتية.</strong> إذا كان الكلام والموسيقى في مسارين منفصلين، احذف مسار الموسيقى بدل تشغيل أداة فصل.</li>
+        <li><strong>اختبر 20–40 ثانية.</strong> اختر جزءًا يجتمع فيه الكلام مع أعلى مستوى للموسيقى؛ فهو الاختبار الأصعب والأكثر واقعية.</li>
+        <li><strong>نفّذ الفصل أو الكتم.</strong> استخدم المعالجة المحلية للملفات الخاصة، أو خدمة ويب لملف غير حساس وتجربة أسرع.</li>
+        <li><strong>استمع بسماعات.</strong> افحص بدايات الكلمات، وحروف السين والشين، والمقاطع الهادئة؛ فالعيوب تظهر فيها غالبًا.</li>
+        <li><strong>ادمج الصوت النظيف مع الصورة.</strong> حافظ على ترميز الفيديو عندما يمكن ذلك لتجنب ضغط الصورة مرة ثانية.</li>
+      </ol>
 
-  <div class="box">
-    <h2>روابط سريعة (أدوات أونلاين)</h2>
-    <ul>
-      <li><a href="https://vocalremover.org/ar/" target="_blank" rel="noopener">VocalRemover</a> – فصل الصوت والموسيقى بدقة عالية.</li>
-      <li><a href="https://moises.ai" target="_blank" rel="noopener">Moises</a> – يعمل على الجوال والكمبيوتر، واجهة سهلة.</li>
-      <li><a href="https://www.media.io/remove-audio-from-video.html" target="_blank" rel="noopener">Media.io</a> – حذف الصوت أو كتم الموسيقى مباشرة من الفيديو.</li>
-      <li><a href="https://www.kapwing.com/tools/split-vocals" target="_blank" rel="noopener">Kapwing</a> – فصل الأصوات وتحرير الفيديو أونلاين.</li>
-      <li><a href="https://audiocleaner.ai/ar" target="_blank" rel="noopener">AudioCleaner.ai</a> – أداة عربية تعتمد الذكاء الاصطناعي للتنقية.</li>
-    </ul>
-    <p class="note">ملاحظة: الأدوات المجانية تفرض غالبًا حدًا على المدة (10–20 دقيقة) أو الحجم.</p>
-  </div>
+      <h2>أداة ويب أم معالجة محلية؟</h2>
+      <div class="two-col">
+        <section class="card">
+          <h3>أداة تعمل في المتصفح</h3>
+          <ul>
+            <li>مناسبة للتجارب السريعة والملفات القصيرة.</li>
+            <li>لا تحتاج إلى إعداد تقني.</li>
+            <li>قد تفرض حدًا للحجم أو المدة أو جودة التنزيل.</li>
+            <li>لا ترفع فيديو شخصيًا قبل قراءة سياسة الخصوصية.</li>
+          </ul>
+        </section>
+        <section class="card">
+          <h3>أداة محلية على الكمبيوتر</h3>
+          <ul>
+            <li>أفضل للملفات الطويلة أو الخاصة.</li>
+            <li>تمنحك تحكمًا أكبر في نموذج الفصل.</li>
+            <li>قد تحتاج إلى جهاز قوي ومساحة تخزين كافية.</li>
+            <li>أدوات مثل UVR أو Demucs مخصصة للفصل، وFFmpeg للقص والدمج والتحويل.</li>
+          </ul>
+        </section>
+      </div>
 
-  <h2>أوامر FFmpeg المختصرة</h2>
+      <div class="callout warn"><strong>نقطة مهمة:</strong> إزالة المسار الصوتي ليست هي إزالة الموسيقى مع إبقاء الكلام. الأمر <code>-an</code> يحذف كل الصوت، ولا يعرف الفرق بين الموسيقى والصوت البشري.</div>
 
-  <h3>1) جعل الفيديو صامتًا (كتم الصوت بالكامل)</h3>
-  <pre><code>ffmpeg -i input.mp4 -c:v copy -an output_silent.mp4</code></pre>
+      <h2>أوامر FFmpeg المفيدة فعلًا</h2>
+      <h3>1) جعل الفيديو صامتًا من دون إعادة ضغط الصورة</h3>
+      <pre><code>ffmpeg -i input.mp4 -c:v copy -an output_silent.mp4</code></pre>
 
-  <h3>2) استخراج الصوت من الفيديو فقط (بدون إعادة ترميز)</h3>
-  <pre><code>ffmpeg -i input.mp4 -vn -acodec copy audio_track.m4a</code></pre>
+      <h3>2) استخراج الصوت للتحليل أو الفصل</h3>
+      <pre><code>ffmpeg -i input.mp4 -vn -ac 2 -ar 44100 extracted_audio.wav</code></pre>
 
-  <h3>3) استبدال صوت الفيديو بملف نظيف بعد الفصل (no_vocals.wav)</h3>
-  <pre><code>ffmpeg -i input.mp4 -i no_vocals.wav -c:v copy -map 0:v:0 -map 1:a:0 -shortest output_clean.mp4</code></pre>
+      <h3>3) إعادة الصوت النظيف إلى الفيديو</h3>
+      <pre><code>ffmpeg -i input.mp4 -i clean_voice.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -shortest output_clean.mp4</code></pre>
 
-  <div class="box">
-    <h2>نصائح سريعة</h2>
-    <ul>
-      <li>إن تلقيت مطالبة حقوق على يوتيوب، جرّب أداة <em>كتم مقطع الموسيقى</em> من استوديو يوتيوب.</li>
-      <li>لجودة أفضل، نفّذ المعالجة محليًا على جهازك عبر FFmpeg بدل الاقتصار على الويب.</li>
-      <li>احترم حقوق النشر: استخدم مصادر صوتية مُصرَّح بها أو خالية من الحقوق.</li>
-    </ul>
-  </div>
+      <p class="small">إذا رفض المشغّل الملف الناتج أو كان ترميز الصورة غير متوافق، يمكن إعادة ترميز الفيديو بدل <code>-c:v copy</code>، لكن ذلك سيستغرق وقتًا أطول وقد يغيّر جودة الصورة.</p>
 
-  <p>
-    <a class="cta" href="https://idraaak.com/%d8%a5%d8%b2%d8%a7%d9%84%d8%a9-%d8%a7%d9%84%d9%85%d9%88%d8%b3%d9%8a%d9%82%d9%89-%d9%85%d9%86-%d8%a7%d9%84%d9%81%d9%8a%d8%af%d9%8a%d9%88/" target="_blank" rel="noopener">
-      الشرح التفصيلي والصور على موقع إدراك
-    </a>
-  </p>
+      <h2>كيف تفحص جودة الفصل؟</h2>
+      <ul>
+        <li><strong>صوت معدني أو متقطع:</strong> جرّب نموذج فصل آخر أو خفف المعالجة بدل تكرارها على الملف نفسه.</li>
+        <li><strong>بقايا موسيقى خلف الكلام:</strong> النتيجة قد تتحسن بتقسيم الملف أو استخدام نموذج مخصص للصوت البشري.</li>
+        <li><strong>اختفاء حروف أو نهايات كلمات:</strong> لا تعتمد النتيجة للنشر قبل مقارنة المقطع بالأصل.</li>
+        <li><strong>عدم تطابق الصوت والصورة:</strong> استخدم الملف الكامل من البداية عند الدمج وتجنب تغيير معدل العينة بين المراحل بلا حاجة.</li>
+        <li><strong>انخفاض الصوت بعد الفصل:</strong> ارفع المستوى باعتدال وتجنب التضخيم الذي يسبب تشويشًا.</li>
+      </ul>
 
-  <footer>
-    © إدراك — هذا الملخص مُستضاف عبر GitHub Pages. الروابط تشير للمصدر الأصلي على إدراك.
-  </footer>
-</main>
+      <div class="callout ok"><strong>قاعدة عملية:</strong> أفضل نتيجة ليست دائمًا المسار الذي اختفت منه الموسيقى أكثر، بل المسار الذي بقي فيه الكلام طبيعيًا وواضحًا.</div>
 
+      <h2>حقوق النشر ومنصات الفيديو</h2>
+      <p>فصل الموسيقى تقنيًا لا يمنحك حق استخدام الفيديو أو الصوت. إذا كان الهدف معالجة مطالبة حقوق على منصة فيديو، راجع أدوات المنصة نفسها أولًا؛ فقد تسمح بكتم الجزء المطالب به أو استبدال الموسيقى من دون إعادة رفع الفيديو. احتفظ دائمًا بإثبات ترخيص الموسيقى البديلة.</p>
+      <div class="callout danger"><strong>تجنب هذا الخطأ:</strong> لا تستخدم أداة مجهولة تطلب كلمة مرور حسابك أو تثبيت إضافة غير موثوقة. معالجة ملف الفيديو لا تحتاج إلى بيانات دخول حساباتك.</div>
+
+      <h2>أسئلة شائعة</h2>
+      <details><summary>هل يمكن إزالة الموسيقى بنسبة 100٪ مع بقاء الكلام كما هو؟</summary><p>ليس دائمًا. عندما تتداخل الموسيقى مع ترددات الكلام، قد تبقى آثار موسيقية أو يتأثر الصوت البشري. التسجيل الذي يحتوي على مسارات منفصلة يعطي نتيجة أنظف بكثير.</p></details>
+      <details><summary>هل يكفي FFmpeg لفصل الموسيقى عن الكلام؟</summary><p>يكفي لحذف مسار مستقل أو كتم كل الصوت أو دمج المسارات، لكنه ليس أداة فصل ذكية لمسار مختلط. استخدم أداة فصل أولًا ثم FFmpeg للدمج.</p></details>
+      <details><summary>ما الصيغة الأفضل قبل الفصل؟</summary><p>يفضل استخراج الصوت بصيغة WAV غير مضغوطة أثناء المعالجة، ثم تحويله إلى AAC عند إعادته إلى فيديو MP4.</p></details>
+      <details><summary>متى تكون خدمة الويب مناسبة؟</summary><p>عندما يكون الملف غير حساس وقصيرًا وتريد تجربة سريعة. للملفات الخاصة أو الكبيرة، تكون المعالجة المحلية أكثر ملاءمة.</p></details>
+
+      <div class="cta-row">
+        <a class="cta" href="https://idraaak.com/%d8%a5%d8%b2%d8%a7%d9%84%d8%a9-%d8%a7%d9%84%d9%85%d9%88%d8%b3%d9%8a%d9%82%d9%89-%d9%85%d9%86-%d8%a7%d9%84%d9%81%d9%8a%d8%af%d9%8a%d9%88/">قراءة الشرح الكامل والأدوات في إدراك</a>
+        <span class="small">يتضمن الشرح الأصلي صورًا وخيارات إضافية للمستخدم العادي.</span>
+      </div>
+    </article>
+  </main>
+  <footer>إدراك — محتوى عربي عملي منشور عبر GitHub Pages.</footer>
 </body>
 </html>
